@@ -1,0 +1,26 @@
+package Service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import Connection.Dbconnection;
+import Model.regModel;
+
+public class regService {
+		Connection con = Dbconnection.getConnection();
+		public int insert(regModel rm)
+		{
+			try{
+				String s = "insert into Form(name,age)values(?,?)";
+				PreparedStatement ps = con.prepareStatement(s);
+				ps.setString(1,rm.getName());
+				ps.setInt(2,rm.getAge());
+				ps.executeUpdate();
+			}
+			catch(Exception e)
+			{}
+			
+			
+			return 0;
+	
+		}}
