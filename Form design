@@ -1,0 +1,86 @@
+package Design;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import Model.regModel;
+import Service.regService;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class REGG {
+
+	private JFrame frame;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					REGG window = new REGG();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public REGG() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(241, 33, 86, 20);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(81, 36, 46, 14);
+		frame.getContentPane().add(lblName);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(241, 75, 86, 20);
+		frame.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblAge = new JLabel("Age");
+		lblAge.setBounds(81, 78, 46, 14);
+		frame.getContentPane().add(lblAge);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				regModel rm = new regModel();
+				regService rs = new regService();
+				rm.setName(textField.getText());
+				rm.setAge(Integer.parseInt(textField_1.getText()));
+				rs.insert(rm);
+			}
+		});
+		btnSubmit.setBounds(141, 167, 89, 23);
+		frame.getContentPane().add(btnSubmit);
+	}
+}
